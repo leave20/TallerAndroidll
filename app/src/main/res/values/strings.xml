@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">TallerAndroidll</string>
+    <string name="app_name" translatable="false">TallerAndroidll</string>
+    <string name="car_car">Car</string>
 </resources>
