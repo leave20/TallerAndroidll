@@ -21,9 +21,8 @@ private static final int READ_CONTACTS_PERMISSIONS=100;
         setContentView(R.layout.activity_main);
 
         int permissionCheck= ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_CONTACTS);
-        if (ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.READ_CONTACTS)!= PackageManager.PERMISSION_GRANTED){
-            if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,Manifest.permission.READ_CONTACTS)) {
-            }else{
+        if (permissionCheck!= PackageManager.PERMISSION_GRANTED){
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.READ_CONTACTS)) {
                 ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.READ_CONTACTS},READ_CONTACTS_PERMISSIONS);
             }
         }
@@ -31,14 +30,11 @@ private static final int READ_CONTACTS_PERMISSIONS=100;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch(requestCode){
-            case READ_CONTACTS_PERMISSIONS:{
-                if (grantResults.length>0 &&grantResults[0]==PackageManager.PERMISSION_GRANTED){
-                    Toast.makeText(MainActivity.this, "Permisos OK",Toast.LENGTH_LONG).show();
-                }else{
-                    Toast.makeText(MainActivity.this, "Sin permisos ",Toast.LENGTH_LONG).show();
-                }
-                return;
+        if (requestCode == READ_CONTACTS_PERMISSIONS) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(MainActivity.this, "Permisos OK", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(MainActivity.this, "Sin permisos ", Toast.LENGTH_LONG).show();
             }
         }
 
